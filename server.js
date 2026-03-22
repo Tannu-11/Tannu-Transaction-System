@@ -6,7 +6,19 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.get("/", (req, res) => {
+    res.send("🚀 Transaction System API is running!");
+});
 
+app.get("/demo", (req, res) => {
+    res.json({
+        message: "Transaction API working",
+        endpoints: {
+            create: "/api/create (POST)",
+            transfer: "/api/transfer (POST)"
+        }
+    });
+});
 app.use("/api", require("./routes/transactionRoutes"));
 
 mongoose.connect(process.env.MONGO_URI)
